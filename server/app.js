@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 
-var indexRouter = require('./routes/index');
+var todoRouter = require('./routes/todo');
 var usersRouter = require('./routes/users');
 const mongodbConnection = require('./config/db');
 
@@ -13,7 +13,7 @@ var app = express();
 
 app.use(
   cors({
-    origin:['http://localhost:3000','http://127.0.0.1:3000','http://192.168.29.98:3000'],
+    origin:['http://localhost:3001','http://127.0.0.1:3001'],
     credentials: true,
   })
 );
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 mongodbConnection()
 
-app.use('/', indexRouter);
+app.use('/todo', todoRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
